@@ -3,6 +3,10 @@
   "version": 2,
   "projects": {
     "enduser": "apps/enduser",
-    "enduser-e2e": "apps/enduser-e2e"
+    "enduser-e2e": "apps/enduser-e2e",
+    "shared-ui": "libs/shared/ui",
+    "storybook-e2e-ui-e2e": "apps/storybook-e2e/ui-e2e",
+    "ticket-admin": "apps/ticket-admin",
+    "ticket-admin-e2e": "apps/ticket-admin-e2e"
   }
 }
