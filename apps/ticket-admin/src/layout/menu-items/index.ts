@@ -1,5 +1,5 @@
 // assets
-import { PhotographIcon } from '@heroicons/react/outline';
+import { PhotographIcon, UserIcon } from '@heroicons/react/outline';
 import {
   ListSVG,
   ClassSettingSVG,
@@ -169,6 +169,14 @@ export const dashboardList: MenuItemType[] = [
     type: 'group',
     icon: SettingSVG,
     url: '/setting',
+    children: [],
+  },
+  {
+    id: 'user',
+    title: 'User',
+    type: 'group',
+    icon: UserIcon,
+    url: '/admin/user',
     children: [],
   },
 ];

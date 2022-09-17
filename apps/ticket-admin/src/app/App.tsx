@@ -1,13 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import './App.css';
-import NxWelcome from './nx-welcome';
-
 import { Route, Routes, Link } from 'react-router-dom';
 import Login from './login';
 import MainLayout from '../layout';
 import { AuthProvider } from '../context/AuthContext';
 import MediaLibary from './media';
 import Profile from './profile';
+import UserList from './user';
+import CreateUserPage from './user/create';
 
 export function App() {
   return (
@@ -24,6 +23,22 @@ export function App() {
           element={
             <MainLayout>
               <MediaLibary />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/user"
+          element={
+            <MainLayout>
+              <UserList />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/user/create"
+          element={
+            <MainLayout>
+              <CreateUserPage />
             </MainLayout>
           }
         />

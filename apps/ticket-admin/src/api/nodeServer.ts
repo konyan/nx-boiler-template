@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const API_ENDPOINT = 'https://api.shwekyar.net/';
-const token = localStorage.getItem('accessToken');
+const token: string | null = localStorage.getItem('accessToken');
 const authHeader = () => ({
-  Authorization: `Bearer ${token}`,
+  Authorization: `Bearer ${token && JSON.parse(token)}`,
 });
 
 const client = axios.create({
