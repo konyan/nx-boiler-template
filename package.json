@@ -5,10 +5,15 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "start:admin": "nx run ticket-admin:serve",
+    "build:admin": "nx build",
+    "test:admin": "nx test"
   },
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.2",
+    "@heroicons/react": "1.0.6",
     "@nrwl/next": "14.7.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.3",

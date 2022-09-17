@@ -15,6 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dh-ticketing/shared-hooks": ["libs/shared-hooks/src/index.ts"],
+      "@dh-ticketing/shared-modal": ["libs/shared-modal/src/index.ts"],
       "@dh-ticketing/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },

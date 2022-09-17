@@ -10,11 +10,22 @@ module.exports = {
     ),
     ...createGlobPatternsForDependencies(__dirname),
   ],
-  purge: [join(__dirname, 'pages/**/*.{js,ts,jsx,tsx}')],
+  // purge: [join(__dirname, 'pages/**/*.{js,ts,jsx,tsx}')],
   theme: {
     extend: {
       screens: {
         mew_sm: '429px',
+      },
+      colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        blue: '#1fb6ff',
+        purple: '#312e81',
+        'purple-md': '#644299',
+        black: '#010101',
+        white: '#ffffff',
+        'gray-dark': '#273444',
+        'gray-light': 'azure',
       },
     },
   },

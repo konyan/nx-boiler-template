@@ -4,6 +4,8 @@
   "projects": {
     "enduser": "apps/enduser",
     "enduser-e2e": "apps/enduser-e2e",
+    "shared-hooks": "libs/shared-hooks",
+    "shared-modal": "libs/shared-modal",
     "shared-ui": "libs/shared/ui",
     "storybook-e2e-ui-e2e": "apps/storybook-e2e/ui-e2e",
     "ticket-admin": "apps/ticket-admin",
