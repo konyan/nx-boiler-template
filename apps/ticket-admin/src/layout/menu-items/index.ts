@@ -144,7 +144,7 @@ export const dashboardList: MenuItemType[] = [
     title: 'Media',
     type: 'group',
     icon: PhotographIcon,
-    url: '/media',
+    url: '/admin/media',
     children: [],
   },
   {

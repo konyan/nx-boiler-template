@@ -7,6 +7,7 @@ import Login from './login';
 import MainLayout from '../layout';
 import { AuthProvider } from '../context/AuthContext';
 import MediaLibary from './media';
+import Profile from './profile';
 
 export function App() {
   return (
@@ -19,10 +20,18 @@ export function App() {
         <Route path="/ticket" element={<MainLayout>ti</MainLayout>} />
         <Route path="/setting" element={<MainLayout>setting</MainLayout>} />
         <Route
-          path="/media"
+          path="/admin/media"
           element={
             <MainLayout>
               <MediaLibary />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/profile"
+          element={
+            <MainLayout>
+              <Profile />
             </MainLayout>
           }
         />

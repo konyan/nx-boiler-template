@@ -9,7 +9,7 @@ interface ProfileSectionProps {
 }
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
+  { name: 'Your Profile', href: '/admin/profile' },
   { name: 'Sign out', href: '#' },
 ];
 
