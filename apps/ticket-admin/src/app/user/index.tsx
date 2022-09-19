@@ -332,6 +332,7 @@ export default function UserListPage() {
       </ul>
 
       <DialogBox
+        size="md"
         open={deleteConfirmationModal}
         onClose={setDeleteConfirmationModal}
         title="Are you Sure!"

@@ -2,15 +2,23 @@ import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationIcon } from '@heroicons/react/outline';
 import { XIcon } from '@heroicons/react/solid';
+import { classNames } from '@dh-ticketing/shared-modal';
 
 interface DialogProps {
   onClose: (val: boolean) => void;
   open?: boolean;
   title: string;
   children?: React.ReactNode;
+  size: 'md' | 'lg' | 'extra';
 }
 
-export const DialogBox = ({ onClose, open, title, children }: DialogProps) => {
+export const DialogBox = ({
+  onClose,
+  open,
+  title,
+  children,
+  size,
+}: DialogProps) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -44,7 +52,14 @@ export const DialogBox = ({ onClose, open, title, children }: DialogProps) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+              <Dialog.Panel
+                className={classNames(
+                  size === 'md' ? 'max-w-lg' : '',
+                  size === 'lg' ? 'max-w-xl' : '',
+                  size === 'extra' ? 'max-w-4xl' : '',
+                  'relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8  w-full h-full'
+                )}
+              >
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="">
                     <div className="mt-3 text-center sm:mt-0  sm:text-left">

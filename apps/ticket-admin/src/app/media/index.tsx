@@ -9,6 +9,7 @@ import {
 import { PencilIcon, PlusIcon as PlusIconMini } from '@heroicons/react/solid';
 import { classNames } from '@dh-ticketing/shared-modal';
 import { Drawer } from '@dh-ticketing/shared/ui';
+import UploadDialog from './components/uploadDialog';
 
 const tabs = [
   { name: 'Recently Viewed', href: '#', current: true },
@@ -16,6 +17,20 @@ const tabs = [
   { name: 'Favorited', href: '#', current: false },
 ];
 const files = [
+  {
+    name: 'IMG_4985.HEIC',
+    size: '3.9 MB',
+    source:
+      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
+    current: true,
+  },
+  {
+    name: 'IMG_4985.HEIC',
+    size: '3.9 MB',
+    source:
+      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80',
+    current: true,
+  },
   {
     name: 'IMG_4985.HEIC',
     size: '3.9 MB',
@@ -55,9 +70,16 @@ const currentFile: any = {
 
 export default function MediaLibary() {
   const [open, setOpen] = useState(false);
+  const [uploadDialog, setUploadDialog] = useState(false);
   const [fileDetail, setfileDeatil] = useState({});
   return (
     <>
+      {/* upload Dialog */}
+      <UploadDialog
+        open={uploadDialog}
+        onClose={setUploadDialog}
+        callback={() => {}}
+      />
       {/* Main content */}
       <div className="flex flex-1 items-stretch overflow-hidden">
         <main className="flex-1 overflow-y-auto">
@@ -69,7 +91,7 @@ export default function MediaLibary() {
                 </h1>
                 <button
                   onClick={() => {
-                    setOpen(true);
+                    setUploadDialog(true);
                   }}
                   type="button"
                   className="rounded-md p-1.5 text-gray-400 hover:bg-white hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -170,7 +192,13 @@ export default function MediaLibary() {
                 className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
               >
                 {files.map((file) => (
-                  <li key={file.name} className="relative">
+                  <li
+                    key={file.name}
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                    className="relative"
+                  >
                     <div
                       className={classNames(
                         file.current
