@@ -4,6 +4,8 @@
   "projects": {
     "enduser": "apps/enduser",
     "enduser-e2e": "apps/enduser-e2e",
+    "shared-endui": "libs/shared/endui",
+    "shared-endui-e2e": "apps/shared-endui-e2e",
     "shared-hooks": "libs/shared-hooks",
     "shared-modal": "libs/shared-modal",
     "shared-ui": "libs/shared/ui",

@@ -8,7 +8,9 @@
     "test": "nx test",
     "start:admin": "nx run ticket-admin:serve",
     "build:admin": "nx build",
-    "test:admin": "nx test"
+    "test:admin": "nx test",
+    "storybook:ui": "nx run shared-endui:storybook",
+    "storybook:endUi": "nx run shared-endui:storybook"
   },
   "private": true,
   "dependencies": {
