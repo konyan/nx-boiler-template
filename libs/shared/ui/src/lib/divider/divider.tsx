@@ -1,6 +1,6 @@
 /* eslint-disable-next-line */
 export interface DividerProps {
-  type: string;
+  type?: string;
   text?: string;
   icon?: string;
 }
@@ -12,7 +12,7 @@ export function Divider({
   ...props
 }: DividerProps) {
   const Label = ({ text }: { text?: string }) => (
-    <div className="relative">
+    <div className="relative my-4">
       <div className="absolute inset-0 flex items-center" aria-hidden="true">
         <div className="w-full border-t border-gray-300" />
       </div>

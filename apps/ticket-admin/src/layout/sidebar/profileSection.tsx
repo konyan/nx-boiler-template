@@ -16,7 +16,7 @@ const userNavigation = [
 const ProfileSection = ({ setSidebarOpen }: ProfileSectionProps) => {
   return (
     <div>
-      <div className="sticky w-full   bg-black items-center justify-between  top-0 z-10 flex h-16 flex-shrink-0 md:bg-white">
+      <div className="absolute w-full md-w-auto bg-black items-center justify-between right-0  top-0 z-10 flex h-16 flex-shrink-0  md:bg-transparent">
         <div className="md:hidden flex h-16  gap-3 flex-shrink-0 items-center  px-8">
           <img
             className="h-8 w-auto"

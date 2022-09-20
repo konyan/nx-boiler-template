@@ -1,43 +1,10 @@
-import { useState } from 'react';
+import { FormInput } from '@dh-ticketing/shared/ui';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ReactPhoneInput, { CountryData } from 'react-phone-input-2';
-import { ApiService } from '../../../api/nodeServer';
-import { FormInput } from '@dh-ticketing/shared/ui';
-export interface MobileProps {
-  country_code: string;
-  phone: string;
-}
-
-function CreateUserPage() {
-  const [mobile, setMobile] = useState<MobileProps>({
-    country_code: '',
-    phone: '',
-  });
-
+const Coupon = () => {
   const navigate = useNavigate();
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!mobile.phone || !mobile.country_code) {
-      return alert('Field Required');
-    }
-
-    const data = new FormData(event.currentTarget);
-    const createData = {
-      name: data.get('name'),
-      email: data.get('email'),
-      password: data.get('password'),
-      passport_number: data.get('passport_number'),
-      country_code: mobile.country_code,
-      phone: mobile.phone,
-    };
-
-    await ApiService.post('/admin/user/create', createData)
-      .then((res) => navigate('/admin/user'))
-      .catch((err) => alert(err.data.message));
-  };
-
+  const handleSubmit = () => {};
   return (
     <div className="py-12 px-12">
       <div className="intro-y flex items-center  mt-8">
@@ -93,33 +60,6 @@ function CreateUserPage() {
               />
             </div>
 
-            <div className="mt-3">
-              <ReactPhoneInput
-                buttonStyle={{
-                  padding: '16px',
-                  backgroundColor: 'transparent',
-                  borderRadius: '6px 0 0 6px',
-                }}
-                inputStyle={{
-                  width: '100%',
-                  borderRadius: '6px',
-                  fontSize: '16px',
-                  fontFamily: 'hero-new, sans-serif',
-                }}
-                // onBlur={handleBlur}
-                countryCodeEditable={false}
-                country={mobile.phone || mobile.country_code ? '' : 'th'}
-                placeholder="+66 4567 5678"
-                value={`${mobile.country_code}${mobile.phone}`}
-                onChange={(value, country: CountryData) => {
-                  setMobile({
-                    country_code: country.dialCode,
-                    phone: value.slice(country.dialCode.length),
-                  });
-                }}
-              />
-            </div>
-
             <div className="text-right mt-5">
               <button
                 type="button"
@@ -143,6 +83,6 @@ function CreateUserPage() {
       </div>
     </div>
   );
-}
+};
 
-export default CreateUserPage;
+export default Coupon;

@@ -7,6 +7,9 @@ import MediaLibary from './media';
 import Profile from './profile';
 import UserList from './user';
 import CreateUserPage from './user/create';
+import TicketList from './ticket';
+import Coupon from './coupon';
+import CreateTicket from './ticket/createTicket';
 
 export function App() {
   return (
@@ -15,8 +18,31 @@ export function App() {
         <Route path="/" element={<Login />} />
         <Route path="/admin/dashboard" element={<MainLayout>das</MainLayout>} />
         <Route path="/sales" element={<MainLayout>sa</MainLayout>} />
-        <Route path="/customers" element={<MainLayout>customer</MainLayout>} />
-        <Route path="/ticket" element={<MainLayout>ti</MainLayout>} />
+        <Route path="/customers" element={<MainLayout>customer</MainLayout>} />]
+        <Route
+          path="/admin/coupon"
+          element={
+            <MainLayout>
+              <Coupon />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/ticket"
+          element={
+            <MainLayout>
+              <TicketList />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/ticket/create"
+          element={
+            <MainLayout>
+              <CreateTicket />
+            </MainLayout>
+          }
+        />
         <Route path="/setting" element={<MainLayout>setting</MainLayout>} />
         <Route
           path="/admin/media"

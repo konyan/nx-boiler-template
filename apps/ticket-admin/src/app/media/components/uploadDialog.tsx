@@ -116,9 +116,15 @@ const UploadDialog = ({ open, onClose, callback }: UploadDialogProps) => {
               className="form-control"
             />
           </div>
-          <div className="mt-5 text-end  w-full">
+          <div className="mt-5 text-end  flex gap-2 w-full">
             <button className=" rounded-full border border-transparent bg-indigo-600 py-2 px-4 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               Upload image
+            </button>
+            <button
+              onClick={() => onClose(false)}
+              className=" rounded-full border border-indigo-600 bg-transparent py-2 px-4 text-xs font-medium text-indigo-600 hover:text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Cancel
             </button>
           </div>
         </div>

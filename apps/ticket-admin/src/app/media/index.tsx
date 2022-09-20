@@ -81,7 +81,7 @@ export default function MediaLibary() {
         callback={() => {}}
       />
       {/* Main content */}
-      <div className="flex flex-1 items-stretch overflow-hidden">
+      <div className="flex flex-1 mt-6 items-stretch overflow-hidden">
         <main className="flex-1 overflow-y-auto">
           <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
             <div className="flex">

@@ -18,6 +18,7 @@ import { DialogBox, Drawer, FormInput } from '@dh-ticketing/shared/ui';
 import { MobileProps } from './create';
 
 import ReactPhoneInput, { CountryData } from 'react-phone-input-2';
+import HeaderWrapper from '../../components/HeaderWrapper';
 
 export default function UserListPage() {
   const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
@@ -87,6 +88,22 @@ export default function UserListPage() {
 
   return (
     <div>
+      <HeaderWrapper
+        title="Staff"
+        ButtonProps={() => {
+          return (
+            <button
+              type="button"
+              onClick={handleAddUser}
+              className="ml-3 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Create
+            </button>
+          );
+        }}
+      >
+        Search
+      </HeaderWrapper>
       <Drawer title="Update User" open={DetailOpen} onClose={setDetailOpen}>
         <form onSubmit={handleUpdate} className="intro-y box p-5">
           <div>
@@ -177,21 +194,9 @@ export default function UserListPage() {
           </div>
         </form>
       </Drawer>
-      <div className=" pb-5 sm:flex sm:items-center sm:justify-between">
-        <h2 className="text-lg font-medium leading-6 text-gray-900">Staff</h2>
-        <div className="mt-3 flex sm:mt-0 sm:ml-4">
-          <button
-            type="button"
-            onClick={handleAddUser}
-            className="ml-3 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Create
-          </button>
-        </div>
-      </div>
       <ul
         role="list"
-        className="py-8 px-6 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+        className="py-12 px-12 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
       >
         {userList &&
           userList?.map((person: UserListType) => (

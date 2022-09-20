@@ -1,5 +1,9 @@
 // assets
-import { PhotographIcon, UserIcon } from '@heroicons/react/outline';
+import {
+  CollectionIcon,
+  PhotographIcon,
+  UserIcon,
+} from '@heroicons/react/outline';
 import {
   ListSVG,
   ClassSettingSVG,
@@ -136,7 +140,7 @@ export const dashboardList: MenuItemType[] = [
     title: 'Ticket',
     type: 'group',
     icon: BookingSVG,
-    url: '/ticket',
+    url: '/admin/ticket',
     children: [],
   },
   {
@@ -156,6 +160,14 @@ export const dashboardList: MenuItemType[] = [
     children: [],
   },
   {
+    id: 'coupon',
+    title: 'Coupon',
+    type: 'group',
+    icon: CollectionIcon,
+    url: '/admin/coupon',
+    children: [],
+  },
+  {
     id: 'sales',
     title: 'Sales',
     url: '/sales',
@@ -164,19 +176,20 @@ export const dashboardList: MenuItemType[] = [
     children: [],
   },
   {
-    id: 'setting',
-    title: 'Setting',
-    type: 'group',
-    icon: SettingSVG,
-    url: '/setting',
-    children: [],
-  },
-  {
     id: 'user',
     title: 'User',
     type: 'group',
     icon: UserIcon,
     url: '/admin/user',
+    children: [],
+  },
+
+  {
+    id: 'setting',
+    title: 'Setting',
+    type: 'group',
+    icon: SettingSVG,
+    url: '/setting',
     children: [],
   },
 ];

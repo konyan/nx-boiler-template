@@ -20,8 +20,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <div className="flex flex-col md:pl-64">
         {/* profile */}
         <ProfileSection setSidebarOpen={setSidebarOpen} />
-        <main className="flex-1 min-h-screen">
-          <div className="px-12 py-5">{children}</div>
+        <main className="flex-1 min-h-screen mt-[40px] md:mt-0">
+          {children}
         </main>
       </div>
     </div>
