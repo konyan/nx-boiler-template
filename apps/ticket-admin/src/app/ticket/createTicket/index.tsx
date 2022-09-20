@@ -3,7 +3,9 @@ import {
   CheckboxList,
   Divider,
   FormInput,
+  MultiDatepicker,
   SelectList,
+  SwitchBox,
   Timepicker,
 } from '@dh-ticketing/shared/ui';
 import React, { useState } from 'react';
@@ -143,21 +145,21 @@ const CreateTicket = () => {
             <p className="my-4 text-md">Location</p>
             <div className="mt-3 flex gap-3">
               <FormInput
-                name="location_lat"
+                name="location_info"
                 id="regular-form-1"
-                type="password"
-                placeholder="Password"
+                type="text"
+                placeholder="latitude"
                 className="form-control"
                 label="Lat"
                 required
               />
               <FormInput
-                name="password"
+                name="location_info"
                 id="regular-form-1"
-                type="password"
-                placeholder="Password"
+                type="text"
+                placeholder="longitude"
                 className="form-control"
-                label="long"
+                label="Long"
                 required
               />
             </div>
@@ -255,8 +257,18 @@ const CreateTicket = () => {
                 </div>
               </div>
             </div>
+            <div className="mt-5  grid grid-cols-2">
+              <div>
+                <p className="text-md mb-4">Unavailable Date</p>
+                <MultiDatepicker />
+              </div>
+              <div className="">
+                <p className="text-md mb-7"> Ticket Available</p>
+                <SwitchBox enabled={true} setEnabled={(v) => v} />
+              </div>
+            </div>
 
-            <div className="text-right mt-5">
+            <div className="text-right mt-16">
               <button
                 type="button"
                 onClick={() => {

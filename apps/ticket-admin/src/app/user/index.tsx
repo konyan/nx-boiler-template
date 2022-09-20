@@ -196,7 +196,7 @@ export default function UserListPage() {
       </Drawer>
       <ul
         role="list"
-        className="py-12 px-12 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+        className="py-8 px-12 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
       >
         {userList &&
           userList?.map((person: UserListType) => (

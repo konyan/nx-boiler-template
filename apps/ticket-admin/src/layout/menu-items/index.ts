@@ -1,5 +1,6 @@
 // assets
 import {
+  ArchiveIcon,
   CollectionIcon,
   PhotographIcon,
   UserIcon,
@@ -157,6 +158,14 @@ export const dashboardList: MenuItemType[] = [
     type: 'group',
     icon: CustomerSVG,
     url: '/customers',
+    children: [],
+  },
+  {
+    id: 'package',
+    title: 'Package',
+    type: 'group',
+    icon: ArchiveIcon,
+    url: '/admin/package',
     children: [],
   },
   {

@@ -63,7 +63,9 @@ export default function SidebarDrawer({
       {/* Static sidebar for desktop */}
       <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex min-h-0 flex-1 flex-col bg-purple">{children}</div>
+        <div className="flex min-h-0 flex-1 flex-col bg-light-gray">
+          {children}
+        </div>
       </div>
     </div>
   );

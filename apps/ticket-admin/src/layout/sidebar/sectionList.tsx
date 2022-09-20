@@ -66,8 +66,8 @@ function SectionList() {
 
   useEffect(() => {
     const currentIndex = location.pathname.split('/');
-    if (currentIndex[1]) {
-      setActiveTab(currentIndex[1]);
+    if (currentIndex[2]) {
+      setActiveTab(currentIndex[2]);
     }
   }, [location]);
 

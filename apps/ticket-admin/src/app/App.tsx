@@ -8,8 +8,9 @@ import Profile from './profile';
 import UserList from './user';
 import CreateUserPage from './user/create';
 import TicketList from './ticket';
-import Coupon from './coupon';
 import CreateTicket from './ticket/createTicket';
+import PackagePage from './package';
+import CouponPage from './coupon';
 
 export function App() {
   return (
@@ -18,12 +19,28 @@ export function App() {
         <Route path="/" element={<Login />} />
         <Route path="/admin/dashboard" element={<MainLayout>das</MainLayout>} />
         <Route path="/sales" element={<MainLayout>sa</MainLayout>} />
-        <Route path="/customers" element={<MainLayout>customer</MainLayout>} />]
+        <Route path="/customers" element={<MainLayout>customer</MainLayout>} />
+        <Route
+          path="/admin/package"
+          element={
+            <MainLayout>
+              <PackagePage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin/package/create"
+          element={
+            <MainLayout>
+              <PackagePage />
+            </MainLayout>
+          }
+        />
         <Route
           path="/admin/coupon"
           element={
             <MainLayout>
-              <Coupon />
+              <CouponPage />
             </MainLayout>
           }
         />
