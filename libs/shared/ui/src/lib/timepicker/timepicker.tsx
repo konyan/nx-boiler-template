@@ -1,8 +1,4 @@
-import './timepicker.scss';
 import 'rc-time-picker/assets/index.css';
-
-import React from 'react';
-import ReactDom from 'react-dom';
 
 import moment from 'moment';
 
