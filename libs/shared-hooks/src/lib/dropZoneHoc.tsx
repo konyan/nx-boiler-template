@@ -32,7 +32,7 @@ export function DropZoneHoc({ children, callback }: DropZoneHocProps) {
 
   return (
     <div {...getRootProps()} className="UploadDropzone">
-      <div>
+      <div className="w-full h-full">
         <input {...getInputProps()} />
         {children}
       </div>

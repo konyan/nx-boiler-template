@@ -5,43 +5,129 @@ import {
   ScissorsIcon,
   TrashIcon,
   LinkIcon,
+  PencilAltIcon,
 } from '@heroicons/react/outline';
 import { DropZoneHoc } from '@dh-ticketing/shared-hooks';
 import React from 'react';
 import { useState } from 'react';
+import { ApiService, getSignUrl, UploadImage } from '../../../api/nodeServer';
 
 interface UploadDialogProps {
   open: boolean;
   onClose: (v: boolean) => void;
   callback: () => void;
 }
+interface UploadFileType {
+  image_url: File | null;
+  image_name: string;
+  caption: string;
+  searchable_text: string | string[];
+}
 const UploadDialog = ({ open, onClose, callback }: UploadDialogProps) => {
-  const [UploadData, setUploadData] = useState('');
+  const [uploadFileData, setUploadFileData] = useState<UploadFileType>({
+    image_url: null,
+    image_name: '',
+    caption: '',
+    searchable_text: '',
+  });
+  const [signUrl, setSignUrl] = useState<{ filename: string; url: string }>({
+    filename: '',
+    url: '',
+  });
+
+  const uploadFile = async (file: File) => {
+    const data = await getSignUrl(file);
+    setSignUrl(data);
+  };
+
+  const handleClose = () => {
+    setUploadFileData({
+      image_url: null,
+      image_name: '',
+      caption: '',
+      searchable_text: '',
+    });
+    setSignUrl({
+      filename: '',
+      url: '',
+    });
+    onClose(false);
+  };
+
+  const handlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUploadFileData({ ...uploadFileData, [e.target.name]: e.target.value });
+  };
+  const handleCreateImage = async () => {
+    if (
+      !uploadFileData.image_url ||
+      uploadFileData.caption === '' ||
+      uploadFileData.searchable_text === ''
+    ) {
+      return alert('Field missing ');
+    }
+    if (uploadFileData.image_url) {
+      await UploadImage(uploadFileData.image_url, signUrl.url);
+    }
+
+    const data = {
+      image_url: signUrl.filename,
+      image_name: signUrl?.filename?.replace('admin/', ''),
+      caption: uploadFileData.caption,
+      searchable_text: uploadFileData.searchable_text,
+    };
+    await ApiService.post('/admin/images', data).then((res) => {
+      handleClose();
+      callback();
+    });
+  };
   return (
-    <DialogBox size="extra" title="Upload Media" open={open} onClose={onClose}>
+    <DialogBox
+      size="extra"
+      title="Upload Media"
+      open={open}
+      onClose={(v) => {
+        handleClose();
+      }}
+    >
       <div className="grid grid-cols-2 gap-[10px]">
         {/* RightSide Menu */}
 
         <div className="h-full">
           <div className="w-full h-[300px]">
             <DropZoneHoc
-              callback={(file) => {
-                console.log(file);
+              callback={(file: any) => {
+                setUploadFileData({ ...uploadFileData, image_url: file });
+                uploadFile(file);
               }}
             >
-              <div className=" flex flex-col items-center w-full h-full">
-                <PhotographIcon className="mb-1 w-6 h-6" />
-
-                <button className="flex-1 rounded-full border border-transparent bg-indigo-600 py-2 px-4 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                  Upload image
-                </button>
-
-                <p>Drop image to upload</p>
-                <div className="text-center">
-                  <p className="text-xs ">File type: JPG, PNG or GIF</p>
-                  <p className="text-xs ">{'File size: <500kb'}</p>
+              {uploadFileData.image_url ? (
+                <div className="w-full h-full cursor-pointer relative overflow-hidden rounded-md">
+                  <div className="absolute w-full h-full flex items-center justify-center bg-light-gray opacity-50">
+                    <PencilAltIcon className="h-8 w-8 text-white" />
+                  </div>
+                  <img
+                    className="object-cover w-full h-full rounded-md"
+                    src={URL.createObjectURL(uploadFileData.image_url)}
+                    alt={uploadFileData.image_name}
+                  />
                 </div>
-              </div>
+              ) : (
+                <div className="w-full h-full cursor-pointer relative overflow-hidden rounded-md">
+                  <div className="absolute w-full flex-col h-full flex items-center justify-center ">
+                    <PhotographIcon className="mb-1 w-6 h-6" />
+
+                    <button className="flex-1 max-h-[40px] rounded-full border border-transparent bg-indigo-600 py-2 px-4 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      Upload image
+                    </button>
+
+                    <p>Drop image to upload</p>
+                    <div className="text-center">
+                      <p className="text-xs ">File type: JPG, PNG or GIF</p>
+                      <p className="text-xs ">{'File size: <500kb'}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </DropZoneHoc>
           </div>
           <div className="mx-6 mt-3 gap-[10px] hidden items-center  rounded-lg bg-gray-100 px-0.5 py-3 sm:flex">
@@ -73,21 +159,22 @@ const UploadDialog = ({ open, onClose, callback }: UploadDialogProps) => {
         <div className="px-[20px]">
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <p className="text-md">Size:</p>
+              <p className="text-md">
+                Size:{' '}
+                {uploadFileData.image_url?.size &&
+                  uploadFileData.image_url?.size + 'KB'}
+              </p>
             </div>
             <div>
-              <p className="text-md">Date:</p>
-            </div>
-            <div>
-              <p className="text-md">Dimensions:</p>
-            </div>
-            <div>
-              <p className="text-md">Extension:</p>
+              <p className="text-md">
+                Extension:{uploadFileData.image_url?.type}
+              </p>
             </div>
           </div>
           <div className="mt-5">
             <FormInput
               disabled
+              value={signUrl.filename.replace('admin/', '')}
               id="Name"
               label="File Name"
               name="file_name"
@@ -99,9 +186,11 @@ const UploadDialog = ({ open, onClose, callback }: UploadDialogProps) => {
           <div className="mt-5">
             <FormInput
               id="regular-form-1"
-              label="Alternated Name"
-              name="Alternated_Name"
+              label="Search Keyword"
+              name="searchable_text"
+              onChange={handlChange}
               type="text"
+              value={uploadFileData.searchable_text}
               placeholder="Alternated Name"
               className="form-control"
             />
@@ -111,17 +200,24 @@ const UploadDialog = ({ open, onClose, callback }: UploadDialogProps) => {
               id="regular-form-1"
               label="Caption"
               name="caption"
+              value={uploadFileData.caption}
+              onChange={handlChange}
               type="text"
               placeholder="caption"
               className="form-control"
             />
           </div>
           <div className="mt-5 text-end  flex gap-2 w-full">
-            <button className=" rounded-full border border-transparent bg-indigo-600 py-2 px-4 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <button
+              onClick={handleCreateImage}
+              className=" rounded-full border border-transparent bg-indigo-600 py-2 px-4 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
               Upload image
             </button>
             <button
-              onClick={() => onClose(false)}
+              onClick={() => {
+                onClose(false);
+              }}
               className=" rounded-full border border-indigo-600 bg-transparent py-2 px-4 text-xs font-medium text-indigo-600 hover:text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Cancel

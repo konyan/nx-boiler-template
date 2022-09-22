@@ -1,4 +1,6 @@
+/* eslint-disable no-var */
 import axios from 'axios';
+import { readFile } from 'fs';
 
 const API_ENDPOINT = 'https://api.shwekyar.net/';
 const token: string | null = localStorage.getItem('accessToken');
@@ -79,12 +81,20 @@ class ApiService {
     });
   }
 
-  static put(path = '', data = {}) {
+  static put(path = '', data = {}, optionalHeader = {}) {
     return client({
       method: 'PUT',
       url: path,
       data: JSON.stringify(data),
-      headers: { ...authHeader() },
+      headers: { ...authHeader(), ...optionalHeader },
+    });
+  }
+  static imagePut(path = '', data = {}, optionalHeader = {}) {
+    return client({
+      method: 'PUT',
+      url: path,
+      data: data,
+      headers: { ...optionalHeader },
     });
   }
   static delete(path = '', data = {}) {
@@ -96,5 +106,28 @@ class ApiService {
     });
   }
 }
+
+export const UploadImage = async (file: File, signUrl: string) => {
+  var readFile = file;
+  var reader = new FileReader();
+  reader.readAsDataURL(readFile);
+
+  try {
+    const response = await ApiService.imagePut(signUrl, readFile, {
+      'Content-Type': file.type,
+    });
+    return response.status === 200 ? 'success' : null;
+  } catch (error) {
+    return 'error';
+  }
+};
+
+export const getSignUrl = async (file: File) => {
+  const signURLRESPONSE = await ApiService.post(`/admin/images/signed-url`, {
+    content_type: file.type,
+    file_path: 'admin',
+  });
+  return signURLRESPONSE.data;
+};
 
 export { ApiService, LocalService };

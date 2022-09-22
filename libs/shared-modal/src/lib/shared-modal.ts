@@ -24,3 +24,12 @@ export interface UserMemberLevelType {
   name: string;
   user_level_id: string;
 }
+
+export interface MediaDetailType {
+  caption: string;
+  created_at: any | null;
+  id: string;
+  image_name: string;
+  image_url: string;
+  updated_at: string;
+}
